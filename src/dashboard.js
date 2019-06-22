@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Logout } from './functionalComponents';
+import { MenuBar } from './functionalComponents';
 import {
     Menu,
     Segment,
@@ -8,29 +8,13 @@ import {
     Grid,
     Progress,
     Label,
-    Pagination
+    Pagination,
+    Button
 
 } from 'semantic-ui-react';
-
-class MenuBar extends Component {
-    render() {
-        return (
-
-            <Segment inverted padded color='blue'>
-                <Menu inverted color='blue' >
-                    <Menu.Item inverted name='Dashboard ' active={true} />
-                    <Menu.Item inverted position='right'>
-                        <Input inverted action={{ type: 'submit', content: 'Search' }} placeholder='Search Expense...' />
-                    </Menu.Item>
-                    <Menu.Item name='Logout' >
-                        <Logout history={this.props.history} />
-                    </Menu.Item>
-                </Menu>
-            </Segment>
-        )
-
-    }
-}
+import { Logout } from './functionalComponents';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 class Paginator extends Component {
     render() {
@@ -53,14 +37,12 @@ export default class Dashboard extends Component {
         this.state = {
             progress: 60,
         }
+        axios.defaults.headers.common.Authorization = Cookies.get('Authorization');
     }
     render() {
         return (
-
             <div>
-
-
-                <MenuBar />
+                <MenuBar history={this.props.history}/>
                 <Segment padded>
                     <Label> Part of your budget consumed for this month </Label>
                     <Progress percent={this.state.progress} inverted active progress color='green' />

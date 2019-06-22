@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Login from './login';
 import Dashboard from './dashboard';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import BudgetForm from './ BudgetForm';
 
 class App extends Component{
 	render(){
@@ -10,7 +11,8 @@ class App extends Component{
 				<Route exact path="/" component={Login} />
 			  	<Route path="/login" component={Login} />
 			  	<Route path="/dashboard" component={Dashboard} />
-		  </Router>
+				<Route path="/budget/add" component={BudgetForm} />
+		  	</Router>
 		);
 	}
 }

@@ -10,8 +10,7 @@ import {
     Message
     
 } from 'semantic-ui-react';
-import {Redirect} from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -38,6 +37,7 @@ export default class Login extends Component {
         .then(response => {
             const {token} = response.data;
             axios.defaults.headers.common.Authorization = `Token ${token}`;
+            Cookies.set('Authorization', `Token ${token}`);
             this.props.history.push('/dashboard');
         })
         .catch(error => {

@@ -1,19 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import {
-    Button,
     Icon,
-
+    Menu,
+    Segment,
+    Input,
+    Label,
+    Button
 } from 'semantic-ui-react';
-
-const Logout = ({ history }) => {
+const Logout = ({history}) => {
+    console.log(history);
     return (
-        <Button onClick={() => { axios.defaults.headers.common.Authorization = null; history.push('/login'); }}>
+        <Button color='facebook' onClick={() => { axios.defaults.headers.common.Authorization = null; history.push('/login'); }}>
             <Icon name='sign-out' />
             Logout
         </Button>
     )
 }
 
-export { Logout };
+
+const MenuBar = ({history}) => {
+    return (<Segment inverted padded color='blue'>
+        <Menu inverted color='blue' >
+            <Menu.Item inverted name='Expense Tracker ' active={true} />
+            <Menu.Item name='Budget' >
+                <Button onClick={()=>history.push('/budget/add')}>Create Budget</Button>
+            </Menu.Item>
+            <Menu.Item name='Expense' >
+                <Button>Add Expense</Button>
+            </Menu.Item>
+            <Menu.Item inverted position='right'>
+                <Input inverted action={{ type: 'submit', content: 'Search' }} placeholder='Search Expense...' />
+            </Menu.Item>
+            <Menu.Item name='Logout' >
+                <Logout history={history} />
+            </Menu.Item>
+        </Menu>
+    </Segment>);
+}
+
+export { Logout, MenuBar };
